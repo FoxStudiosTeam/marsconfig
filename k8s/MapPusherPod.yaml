@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: MarsPusherPod
+  labels:
+    app: MarsPusherPod
+spec:
+  containers:
+    - name: MapPusherPod
+      image: endienasg/marspusher
+      imagePullPolicy: IfNotPresent
+  restartPolicy: Always
+
