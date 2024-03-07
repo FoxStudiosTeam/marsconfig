@@ -11,6 +11,17 @@ spec:
       labels:
         app: mars-pusher
     spec:
+      initContainers:
+        - name: wait-for-other-pod
+          image: busybox
+          args:
+            - /bin/sh
+            - -c
+            - >
+              set -x;
+              while [ $(curl -sw '%{http_code}' "http://rabbitmq:5672" -o /dev/null) -ne 200 ]; do
+                sleep 15;
+              done
       containers:
         - name: marspusherpod-failed
           image: endienasg/marspusher:master
@@ -116,6 +127,17 @@ spec:
       labels:
         app: mars-bridge
     spec:
+      initContainers:
+        - name: wait-for-other-pod
+          image: busybox
+          args:
+            - /bin/sh
+            - -c
+            - >
+              set -x;
+              while [ $(curl -sw '%{http_code}' "http://rabbitmq:5672" -o /dev/null) -ne 200 ]; do
+                sleep 15;
+              done
       containers:
         - name: marsbridge-deployment
           image: endienasg/marsbridge:master
