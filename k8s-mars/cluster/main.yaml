@@ -43,15 +43,16 @@ metadata:
     env: prod
     owner: endienasg
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: mars-pusher
   ports:
     - name: http
       protocol: TCP
-      port: 80
+      port: 5000
       targetPort: 25565
-  clusterIP: 10.96.0.12
+      nodePort: 30007
+  #clusterIP: 10.96.0.12
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -100,7 +101,7 @@ metadata:
     env: prod
     owner: endienasg
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: rabbitmq
   ports:
@@ -108,6 +109,7 @@ spec:
       protocol: TCP
       port: 15672
       targetPort: 15672
+      nodePort: 30008
     - name: messages
       protocol: TCP
       port: 5672
