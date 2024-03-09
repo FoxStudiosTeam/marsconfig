@@ -241,6 +241,9 @@ spec:
         - name: earth-mars-transmitter
           image: endienasg/earth-mars-transmitter:master
           imagePullPolicy: Always
+          env:
+            - name: "MARS_IP"
+              value: "26.18.37.10" #Измените на свои значения!
           ports:
             - containerPort: 25578
 
