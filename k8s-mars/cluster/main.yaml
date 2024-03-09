@@ -31,7 +31,7 @@ spec:
               value: "guest"
             - name: "RABBIT_MQ_LOGIN"
               value: "guest"
-            - name: EARTH_IP
+            - name: "EARTH_IP"
               value: "26.238.15.95" #Измените на свои значения!
           ports:
             - containerPort: 25565
@@ -233,7 +233,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: earth-mars-transmitter
+      app: mars-earth-listener
   template:
     metadata:
       labels:
