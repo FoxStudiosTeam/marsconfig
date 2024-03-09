@@ -1,6 +1,9 @@
 $jobs = @(
-  Start-Job {kubectl port-forward services/earth-listener-service 30007:5000}
   Start-Job {kubectl port-forward services/earth-queue-service 30008:15672}
+  Start-Job {kubectl port-forward services/earth-queue-service 30009:5672}
+  Start-Job {kubectl port-forward services/earth-db-service 30012:5432}
+  Start-Job {kubectl port-forward services/earth-mars-transmitter-service 30014:25578}
+  Start-Job {kubectl port-forward services/earth-rest-service 30013:25576}
 )
 
 try {
