@@ -59,7 +59,7 @@ spec:
       protocol: TCP
       port: 5672
       targetPort: 5672
-
+      nodePort: 30009
 ---
 
 apiVersion: apps/v1
@@ -182,17 +182,7 @@ spec:
       labels:
         app: earth-rest
     spec:
-      initContainers:
-        - name: wait-for-other-pod
-          image: busybox
-          args:
-            - /bin/sh
-            - -c
-            - >
-              set -x;
-              while [ $(curl -sw '%{http_code}' "http://earth-db-service:5432" -o /dev/null) -ne 200 ]; do
-                sleep 15;
-              done
+
       containers:
         - name: earth-rest-deployment
           image: endienasg/earthrestproject:master
@@ -209,7 +199,7 @@ metadata:
     env: prod
     owner: endienasg
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: earth-rest
   ports:
@@ -217,3 +207,4 @@ spec:
       protocol: TCP
       port: 25576
       targetPort: 25576
+      nodePort: 30013
