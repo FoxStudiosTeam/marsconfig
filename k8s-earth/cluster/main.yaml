@@ -91,7 +91,7 @@ spec:
           image: endienasg/earthbridge:master
           imagePullPolicy: Always
           ports:
-            - containerPort: 25575
+            - containerPort: 25577
 
 ---
 apiVersion: v1
@@ -102,14 +102,15 @@ metadata:
     env: prod
     owner: endienasg
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: earth-bridge
   ports:
     - name: udp
       protocol: UDP
-      port: 25575
-      targetPort: 25575
+      port: 25577
+      targetPort: 25577
+      nodePort: 30015
 ---
 
 apiVersion: apps/v1
@@ -231,7 +232,7 @@ spec:
           image: endienasg/earth-mars-transmitter
           imagePullPolicy: Always
           ports:
-            - containerPort: 30025
+            - containerPort: 25578
 
 ---
 apiVersion: v1
@@ -248,6 +249,6 @@ spec:
   ports:
     - name: http
       protocol: TCP
-      port: 25577
-      targetPort: 25577
+      port: 25578
+      targetPort: 25578
       nodePort: 30014
