@@ -164,3 +164,56 @@ spec:
       port: 5432
       targetPort: 5432
       nodePort: 30012
+
+---
+
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: earth-rest-deployment
+spec:
+  selector:
+    matchLabels:
+      app: earth-rest
+  template:
+    metadata:
+      labels:
+        app: earth-rest
+    spec:
+      initContainers:
+        - name: wait-for-other-pod
+          image: busybox
+          args:
+            - /bin/sh
+            - -c
+            - >
+              set -x;
+              while [ $(curl -sw '%{http_code}' "http://earth-db-service:5432" -o /dev/null) -ne 200 ]; do
+                sleep 15;
+              done
+      containers:
+        - name: earth-rest-deployment
+          image: endienasg/earthrestproject:master
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 25576
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: earth-rest-service
+  labels:
+    env: prod
+    owner: endienasg
+spec:
+  type: ClusterIP
+  selector:
+    app: earth-rest
+  ports:
+    - name: http
+      protocol: TCP
+      port: 25576
+      targetPort: 25576
