@@ -109,7 +109,7 @@ spec:
       protocol: TCP
       port: 15672
       targetPort: 15672
-      nodePort: 30008
+      nodePort: 30010
     - name: messages
       protocol: TCP
       port: 5672
