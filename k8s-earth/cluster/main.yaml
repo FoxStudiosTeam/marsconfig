@@ -229,7 +229,7 @@ spec:
 
       containers:
         - name: earth-mars-transmitter
-          image: endienasg/earth-mars-transmitter
+          image: endienasg/earth-mars-transmitter:master
           imagePullPolicy: Always
           ports:
             - containerPort: 25578
