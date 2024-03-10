@@ -237,6 +237,16 @@ spec:
               while [ $(curl -sw '%{http_code}' "http://earth-db-service:5432" -o /dev/null) -ne 200 ]; do
                 sleep 15;
               done
+        - name: wait-for-other-pod
+          image: busybox
+          args:
+            - /bin/sh
+            - -c
+            - >
+              set -x;
+              while [ $(curl -sw '%{http_code}' "http://earth-rest-service:25576" -o /dev/null) -ne 200 ]; do
+                sleep 15;
+              done
       containers:
         - name: earth-mars-transmitter
           image: endienasg/earth-mars-transmitter:master
