@@ -91,7 +91,7 @@ spec:
           image: endienasg/earthbridge:master
           imagePullPolicy: Always
           ports:
-            - containerPort: 25577
+            - containerPort: 28961
 
 ---
 apiVersion: v1
@@ -108,8 +108,8 @@ spec:
   ports:
     - name: udp
       protocol: UDP
-      port: 25577
-      targetPort: 25577
+      port: 28961
+      targetPort: 28961
       nodePort: 30015
 ---
 

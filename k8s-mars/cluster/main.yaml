@@ -146,6 +146,9 @@ spec:
         - name: marsbridge-deployment
           image: endienasg/marsbridge:master
           imagePullPolicy: Always
+          env:
+            - name: "EARTH_IP"
+              value: "26.238.15.95" #Измените на свои значения!
           ports:
             - containerPort: 25575
 
