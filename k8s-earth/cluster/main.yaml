@@ -65,64 +65,6 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: earth-bridge-deployment
-spec:
-  selector:
-    matchLabels:
-      app: earth-bridge
-  template:
-    metadata:
-      labels:
-        app: earth-bridge
-    spec:
-      initContainers:
-        - name: wait-for-other-pod
-          image: busybox
-          args:
-            - /bin/sh
-            - -c
-            - >
-              set -x;
-              while [ $(curl -sw '%{http_code}' "http://rabbitmq:5672" -o /dev/null) -ne 200 ]; do
-                sleep 15;
-              done
-      containers:
-        - name: earth-deployment
-          image: endienasg/earthbridge:master
-          imagePullPolicy: Always
-          env:
-            - name: "EARTH_BRIDGE_IP"
-              value: "0.0.0.0"
-          ports:
-            - containerPort: 28961
-              protocol: UDP
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: earth-bridge-service
-  labels:
-    env: prod
-    owner: endienasg
-spec:
-  type: NodePort
-  selector:
-    app: earth-bridge
-  ports:
-    - name: udp
-      protocol: UDP
-      port: 28961
-      targetPort: 28961
-      nodePort: 30015
-  externalIPs:
-    - "192.168.1.124"
-
----
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
   name: postgres
 spec:
   replicas: 1
