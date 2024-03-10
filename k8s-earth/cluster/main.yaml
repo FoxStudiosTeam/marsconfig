@@ -90,6 +90,9 @@ spec:
         - name: earth-deployment
           image: endienasg/earthbridge:master
           imagePullPolicy: Always
+          env:
+            - name: "EARTH_BRIDGE_IP"
+              value: "192.168.1.124"
           ports:
             - containerPort: 28961
 
@@ -253,7 +256,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: "MARS_IP"
-              value: "26.18.37.10" #Измените на свои значения!
+              value: "192.168.1.106" #Измените на свои значения!
           ports:
             - containerPort: 25578
 
@@ -275,3 +278,4 @@ spec:
       port: 25578
       targetPort: 25578
       nodePort: 30014
+

@@ -32,7 +32,7 @@ spec:
             - name: "RABBIT_MQ_LOGIN"
               value: "guest"
             - name: "EARTH_IP"
-              value: "26.238.15.95" #Измените на свои значения!
+              value: "192.168.1.124" #Измените на свои значения!
           ports:
             - containerPort: 25565
 
@@ -148,7 +148,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: "EARTH_IP"
-              value: "26.238.15.95" #Измените на свои значения!
+              value: "192.168.1.124" #Измените на свои значения!
             - name: "PORT"
               value: "30015" #Измените на свои значения!
           ports:
