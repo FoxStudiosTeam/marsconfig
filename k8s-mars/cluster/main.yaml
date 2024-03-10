@@ -149,6 +149,8 @@ spec:
           env:
             - name: "EARTH_IP"
               value: "26.238.15.95" #Измените на свои значения!
+            - name: "PORT"
+              value: "30015" #Измените на свои значения!
           ports:
             - containerPort: 25575
 
