@@ -227,7 +227,7 @@ spec:
         app: earth-mars-transmitter
     spec:
       initContainers:
-        - name: wait-for-other-pod
+        - name: wait-for-other-pod-1
           image: busybox
           args:
             - /bin/sh
@@ -237,7 +237,7 @@ spec:
               while [ $(curl -sw '%{http_code}' "http://earth-db-service:5432" -o /dev/null) -ne 200 ]; do
                 sleep 15;
               done
-        - name: wait-for-other-pod
+        - name: wait-for-other-pod-2
           image: busybox
           args:
             - /bin/sh
