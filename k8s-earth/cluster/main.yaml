@@ -92,7 +92,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: "EARTH_BRIDGE_IP"
-              value: "localhost"
+              value: "0.0.0.0"
           ports:
             - containerPort: 28961
               protocol: UDP
